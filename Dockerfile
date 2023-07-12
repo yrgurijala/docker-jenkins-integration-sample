@@ -1,4 +1,11 @@
-FROM openjdk:8
+FROM openjdk:8-jre-alpine
+
+RUN apk update && apk add bash
+
+WORKDIR /app
+
+COPY /target/ddocker-jenkins-integration-sample.jar /app
+
 EXPOSE 8080
-ADD target/docker-jenkins-integration-sample.jar docker-jenkins-integration-sample.jar
-ENTRYPOINT [ "java", "-jar", "/docker-jenkins-integration-sample.jar" ]
+
+CMD [ "java", "-jar", "docker-jenkins-integration-sample.jar" ]
